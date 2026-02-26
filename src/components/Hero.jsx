@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion'
 
+function scrollTo(id) {
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-coki-black/[0.02] pt-20">
@@ -47,12 +52,18 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#productos" className="btn-apple-primary inline-flex items-center justify-center">
+          <button
+            onClick={() => scrollTo('productos')}
+            className="btn-apple-primary inline-flex items-center justify-center"
+          >
             Ver productos
-          </a>
-          <a href="#nosotros" className="btn-apple-outline inline-flex items-center justify-center">
+          </button>
+          <button
+            onClick={() => scrollTo('nosotros')}
+            className="btn-apple-outline inline-flex items-center justify-center"
+          >
             Conoce más
-          </a>
+          </button>
         </motion.div>
       </div>
 

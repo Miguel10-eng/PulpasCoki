@@ -37,7 +37,7 @@ export default function ProductsSection() {
             </h3>
             <p className="text-coki-black/60 mb-8">
               {type === 'wholesale'
-                ? 'Precios especiales para compras al por mayor. Ideal para negocios y emprendimientos.'
+                ? <>Precios especiales para compras al por mayor. Ideal para negocios y emprendimientos. <span className="font-semibold text-coki-red">A partir de 15 unidades de pulpa.</span></>
                 : 'Compra al detal con la calidad que nos caracteriza.'}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">

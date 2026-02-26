@@ -1,5 +1,16 @@
 import { motion } from 'framer-motion'
 
+function scrollTo(id) {
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+const links = [
+  { label: 'Productos', id: 'productos' },
+  { label: 'Nosotros', id: 'nosotros' },
+  { label: 'Contacto', id: 'contacto' },
+]
+
 export default function Footer() {
   return (
     <footer className="py-12 px-6 bg-coki-black text-white">
@@ -14,9 +25,15 @@ export default function Footer() {
           <span className="text-xl font-bold text-coki-red">Coki</span>
         </motion.div>
         <div className="flex gap-8 text-sm text-white/70">
-          <a href="#productos" className="hover:text-white transition-colors">Productos</a>
-          <a href="#nosotros" className="hover:text-white transition-colors">Nosotros</a>
-          <a href="#contacto" className="hover:text-white transition-colors">Contacto</a>
+          {links.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              className="hover:text-white transition-colors"
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
       <motion.div
