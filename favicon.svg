@@ -1,4 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#E63946"/>
-  <text x="50" y="68" font-family="Arial" font-size="50" font-weight="bold" fill="white" text-anchor="middle">P</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Hoja -->
+  <path d="M32 8 C32 8 38 2 44 4 C42 10 36 12 32 8Z" fill="#4CAF50"/>
+  <path d="M32 8 C32 8 26 3 22 6 C24 11 29 12 32 8Z" fill="#66BB6A"/>
+  <!-- Tallo -->
+  <path d="M32 8 L32 14" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cuerpo de la manzana -->
+  <path d="M14 28 C14 18 20 14 28 14 L36 14 C44 14 50 18 50 28 L50 40 C50 52 44 58 32 58 C20 58 14 52 14 40 Z" fill="url(#appleGrad)"/>
+  <!-- Brillo -->
+  <ellipse cx="24" cy="24" rx="5" ry="7" fill="white" opacity="0.25" transform="rotate(-20 24 24)"/>
+  <!-- Definición del gradiente -->
+  <defs>
+    <linearGradient id="appleGrad" x1="14" y1="14" x2="50" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="50%" stop-color="#E63946"/>
+      <stop offset="100%" stop-color="#C1121F"/>
+    </linearGradient>
+  </defs>
 </svg>
