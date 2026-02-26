@@ -13,7 +13,7 @@ const highlights = [
     icon: Truck,
     title: 'Distribución Villacense',
     description: 'Empresa orgullosamente villavicense, distribuyendo deliciosas pulpas en la región y todo el país.',
-    image: '/transporte-domi.avif',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
   },
   {
     icon: Heart,
