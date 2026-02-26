@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-coki-white text-coki-black antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-apple {
+    @apply px-6 py-3 rounded-apple-lg font-medium transition-all duration-300;
+    @apply active:scale-[0.98];
+  }
+  .btn-apple-primary {
+    @apply btn-apple bg-coki-red text-white;
+    @apply hover:bg-coki-red-dark hover:shadow-apple-hover;
+  }
+  .btn-apple-outline {
+    @apply btn-apple border-2 border-coki-black text-coki-black bg-transparent;
+    @apply hover:bg-coki-black hover:text-white;
+  }
+  .card-apple {
+    @apply rounded-apple-lg bg-white shadow-apple transition-all duration-300;
+    @apply hover:shadow-apple-hover;
+  }
+}
