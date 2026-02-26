@@ -64,9 +64,6 @@ export default function Header() {
             alt="Pulpas Coki"
             className="h-9 sm:h-10 w-auto object-contain"
           />
-          <span className="hidden sm:block text-white font-bold text-base tracking-tight">
-            Pulpas <span className="text-coki-red">Coki</span>
-          </span>
         </Link>
 
         {/* Nav desktop */}
