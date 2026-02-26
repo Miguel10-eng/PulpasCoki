@@ -31,7 +31,7 @@ export default function ProductModal({ product, type, onClose }) {
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -44,13 +44,18 @@ export default function ProductModal({ product, type, onClose }) {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="relative z-[101] w-full max-w-[42rem] max-h-[calc(100vh-2rem)] bg-white rounded-[20px] shadow-2xl overflow-hidden flex flex-col"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 40 }}
+        transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+        className="relative z-[101] w-full sm:max-w-[42rem] bg-white sm:rounded-[20px] rounded-t-[24px] shadow-2xl flex flex-col max-h-[92dvh] sm:max-h-[calc(100vh-2rem)]"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Drag handle visible solo en mobile */}
+        <div className="sm:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
+          <div className="w-10 h-1 rounded-full bg-gray-300" />
+        </div>
+
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors text-coki-black"
@@ -58,46 +63,49 @@ export default function ProductModal({ product, type, onClose }) {
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex flex-col sm:flex-row sm:items-center min-h-0" style={{ minHeight: 0 }}>
-          <div className="relative w-full sm:w-[300px] flex-shrink-0 h-[240px] sm:h-[375px] bg-gray-100 flex items-center justify-center p-4">
-            <img
-              key={imageIndex}
-              src={images[imageIndex]}
-              alt={product.name}
-              className="w-full h-full object-contain"
-            />
-            {images.length > 1 && (
-              <>
-                <button
-                  onClick={() => setImageIndex((i) => (i === 0 ? images.length - 1 : i - 1))}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 shadow-md flex items-center justify-center hover:bg-white transition-colors z-10"
-                >
-                  <ChevronLeft className="w-4 h-4 text-coki-black" />
-                </button>
-                <button
-                  onClick={() => setImageIndex((i) => (i === images.length - 1 ? 0 : i + 1))}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 shadow-md flex items-center justify-center hover:bg-white transition-colors z-10"
-                >
-                  <ChevronRight className="w-4 h-4 text-coki-black" />
-                </button>
-                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10">
-                  {images.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setImageIndex(i)}
-                      className={`h-1.5 rounded-full transition-all ${imageIndex === i ? 'w-5 bg-white' : 'w-1.5 bg-white/60'}`}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+        {/* Área scrollable */}
+        <div className="overflow-y-auto flex-1 min-h-0">
+          <div className="flex flex-col sm:flex-row sm:items-stretch">
+            {/* Imagen */}
+            <div className="relative w-full sm:w-[280px] flex-shrink-0 h-[200px] sm:h-auto bg-gray-100 flex items-center justify-center p-4">
+              <img
+                key={imageIndex}
+                src={images[imageIndex]}
+                alt={product.name}
+                className="w-full h-full object-contain"
+              />
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setImageIndex((i) => (i === 0 ? images.length - 1 : i - 1))}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 shadow-md flex items-center justify-center hover:bg-white transition-colors z-10"
+                  >
+                    <ChevronLeft className="w-4 h-4 text-coki-black" />
+                  </button>
+                  <button
+                    onClick={() => setImageIndex((i) => (i === images.length - 1 ? 0 : i + 1))}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 shadow-md flex items-center justify-center hover:bg-white transition-colors z-10"
+                  >
+                    <ChevronRight className="w-4 h-4 text-coki-black" />
+                  </button>
+                  <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10">
+                    {images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setImageIndex(i)}
+                        className={`h-1.5 rounded-full transition-all ${imageIndex === i ? 'w-5 bg-white' : 'w-1.5 bg-white/60'}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
 
-          <div className="flex-1 min-w-0 flex flex-col overflow-y-auto">
-            <div className="p-4 sm:p-6 flex flex-col flex-1 min-h-0">
+            {/* Información del producto */}
+            <div className="flex-1 min-w-0 p-4 sm:p-6 flex flex-col">
               <span className="text-xs font-medium text-coki-red mb-1">{TYPES[type]}</span>
               <h2 id="modal-title" className="text-lg sm:text-xl font-bold text-coki-black mb-2">{product.name}</h2>
-              <p className="text-sm text-coki-black/70 mb-3 line-clamp-2">{product.description}</p>
+              <p className="text-sm text-coki-black/70 mb-3">{product.description}</p>
 
               <div className="mb-3">
                 <h3 className="font-semibold text-coki-black mb-1 text-xs sm:text-sm">Beneficios</h3>
@@ -114,11 +122,11 @@ export default function ProductModal({ product, type, onClose }) {
               <div className="mb-4 p-3 rounded-[14px] bg-coki-red/5 border border-coki-red/20">
                 <p className="text-xs text-coki-black leading-relaxed">
                   <span className="text-coki-red font-semibold">Por qué comprarla: </span>
-                  <span className="line-clamp-2">{product.reasonToBuy}</span>
+                  {product.reasonToBuy}
                 </p>
               </div>
 
-              <div className="mt-auto pt-4 space-y-3 border-t border-gray-100">
+              <div className="pt-4 space-y-3 border-t border-gray-100">
                 <div>
                   <p className="text-xs font-medium text-coki-black mb-1.5">Gramaje</p>
                   <div className="flex gap-2">

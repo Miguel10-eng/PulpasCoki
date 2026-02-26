@@ -1,12 +1,39 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 
+function scrollToSection(id) {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { cartCount } = useCart()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleNavClick = (sectionId, closeMobile = false) => {
+    if (closeMobile) setIsMobileMenuOpen(false)
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => scrollToSection(sectionId), 100)
+    } else {
+      scrollToSection(sectionId)
+    }
+  }
+
+  const navLinks = [
+    { label: 'Productos', id: 'productos' },
+    { label: 'Nosotros', id: 'nosotros' },
+    { label: 'Quiénes somos', id: 'quienes-somos' },
+    { label: 'Video', id: 'video' },
+    { label: 'Contacto', id: 'contacto' },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-black/5">
@@ -20,21 +47,15 @@ export default function Header() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href={`${import.meta.env.BASE_URL}#/#productos`} className="text-coki-black/80 hover:text-coki-red transition-colors font-medium">
-            Productos
-          </a>
-          <a href={`${import.meta.env.BASE_URL}#/#nosotros`} className="text-coki-black/80 hover:text-coki-red transition-colors font-medium">
-            Nosotros
-          </a>
-          <a href={`${import.meta.env.BASE_URL}#/#quienes-somos`} className="text-coki-black/80 hover:text-coki-red transition-colors font-medium">
-            Quiénes somos
-          </a>
-          <a href={`${import.meta.env.BASE_URL}#/#video`} className="text-coki-black/80 hover:text-coki-red transition-colors font-medium">
-            Video
-          </a>
-          <a href={`${import.meta.env.BASE_URL}#/#contacto`} className="text-coki-black/80 hover:text-coki-red transition-colors font-medium">
-            Contacto
-          </a>
+          {navLinks.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className="text-coki-black/80 hover:text-coki-red transition-colors font-medium"
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="flex items-center gap-4">
@@ -72,21 +93,15 @@ export default function Header() {
             className="md:hidden bg-white border-t border-black/5"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              <a href={`${import.meta.env.BASE_URL}#/#productos`} onClick={() => setIsMobileMenuOpen(false)} className="font-medium">
-                Productos
-              </a>
-              <a href={`${import.meta.env.BASE_URL}#/#nosotros`} onClick={() => setIsMobileMenuOpen(false)} className="font-medium">
-                Nosotros
-              </a>
-              <a href={`${import.meta.env.BASE_URL}#/#quienes-somos`} onClick={() => setIsMobileMenuOpen(false)} className="font-medium">
-                Quiénes somos
-              </a>
-              <a href={`${import.meta.env.BASE_URL}#/#video`} onClick={() => setIsMobileMenuOpen(false)} className="font-medium">
-                Video
-              </a>
-              <a href={`${import.meta.env.BASE_URL}#/#contacto`} onClick={() => setIsMobileMenuOpen(false)} className="font-medium">
-                Contacto
-              </a>
+              {navLinks.map(({ label, id }) => (
+                <button
+                  key={id}
+                  onClick={() => handleNavClick(id, true)}
+                  className="font-medium text-left"
+                >
+                  {label}
+                </button>
+              ))}
               <Link to="/carrito" onClick={() => setIsMobileMenuOpen(false)} className="font-medium flex items-center gap-2">
                 <ShoppingCart className="w-4 h-4" />
                 Carrito {cartCount > 0 && `(${cartCount})`}

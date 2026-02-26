@@ -60,9 +60,9 @@ export default function CartPage() {
             <ShoppingBag className="w-20 h-20 text-coki-black/20 mx-auto mb-6" />
             <h2 className="text-xl font-semibold text-coki-black mb-2">Tu carrito está vacío</h2>
             <p className="text-coki-black/60 mb-8">Agrega pulpas deliciosas para comenzar tu pedido</p>
-            <a href={`${import.meta.env.BASE_URL}#/#productos`} className="btn-apple-primary inline-flex items-center gap-2">
+            <Link to="/" className="btn-apple-primary inline-flex items-center gap-2">
               Ver productos
-            </a>
+            </Link>
           </motion.div>
         ) : (
           <div className="space-y-8">
