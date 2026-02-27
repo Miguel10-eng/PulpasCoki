@@ -97,7 +97,7 @@ export default function Hero() {
           className="mb-5 sm:mb-6"
         >
           <img
-            src={`${import.meta.env.BASE_URL}icono-coki.png`}
+            src={`${import.meta.env.BASE_URL}logo-blanco-coki.png`}
             alt="Pulpas Coki"
             className="h-20 sm:h-28 md:h-36 w-auto mx-auto object-contain drop-shadow-[0_0_36px_rgba(230,57,70,0.45)]"
           />

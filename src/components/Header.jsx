@@ -60,7 +60,7 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
           <img
-            src={`${import.meta.env.BASE_URL}icono-coki.png`}
+            src={`${import.meta.env.BASE_URL}logo-blanco-coki.png`}
             alt="Pulpas Coki"
             className="h-9 sm:h-10 w-auto object-contain"
           />
